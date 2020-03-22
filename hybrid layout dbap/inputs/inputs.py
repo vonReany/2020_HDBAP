@@ -2,52 +2,36 @@ import pandas as pd
 import numpy as np
 import random as rnd
 
-def Case():
-    file = pd.ExcelFile("inputs\data.xlsx")
+def take_user_input(prompt="Choose one", input_type=str, possible_inputs=[], input_description=None):
+    # DOCUMENT
+    if input_description and not len(input_description) == len(possible_inputs):
+        print("Debug: possible_inputs and input_description lengths are different.")
+    print_possiblities = True # Enable it for first try
     while True:
-        case = input("Which case would you like to run? (if you don't know the case names, write c) = ")
-        if case == "c":
-            print(file.sheet_names)
+        # Print possiblities if flag enabled
+        if print_possiblities and possible_inputs:
+            for i, choice in enumerate(possible_inputs):
+                print("> {} {}".format(choice, "- " + input_description[i] if input_description else ""))
+            print_possiblities = False
+        # Take the input from user
+        input_msg = input("{}\n> ".format(prompt)).strip()
+        # If user requesting help
+        if input_msg == "help":
+            print_possiblities = True
+            continue
+        # Check type of input
+        try:
+            input_msg = input_type(input_msg)
+        except:
+            print("!! Type Error, please enter a(n) {}".format(str(input_type.__name__)))
+            continue
+        # Check if input is correct
+        if possible_inputs and input_msg in possible_inputs:
+            return input_msg
+        elif not possible_inputs:
+            return input_msg
         else:
-            if case not in file.sheet_names:
-                print("You have entered incorrectly. Please try again.")
-            else:
-                break
-    while True:
-        structure = input("Which port structure would you like to run? (f - flat structure, q - quadratic) = ")
-        if structure == "f" or structure == "q":
-            break
-        else:
-            print("You have entered incorrectly. Please try again.")
-    nor = int(input("How many times do you want to run the algorithm? = "))
-    return case, structure, nor
-
-def Vessel_inputs(case):
-    data = pd.read_excel("inputs\data.xlsx", sheet_name=case)
-    pl = data.values.tolist()
-    nVessel = int(pl[0][1])
-    nBerth = int(pl[6][1])
-    return nVessel, [int(pl[1][i+1]) for i in range(nVessel)], [int(pl[2][i+1]) for i in range(nVessel)], [int(pl[3][i+1]) for i in range(nVessel)], [int(pl[4][i+1]) for i in range(nVessel)], [int(pl[5][i+1]) for i in range(nVessel)], nBerth, [int(pl[7][i+1]) for i in range(nBerth)], [int(pl[8][i+1]) for i in range(nBerth)], [int(pl[10][i+1]) for i in range(2)]
-
-def Algorithm_inputs(nVessel):
-    nIteration = 50
-    nParticle = 20
-    c1 = 2.041
-    c2 = 0.948
-    wmin = 0.40
-    wmax = 0.90
-    minCoordination = -nVessel * 0.50
-    maxCoordination = nVessel * 0.50
-    minVel = minCoordination * 0.10
-    maxVel = maxCoordination * 0.10
-    beta0 = 1
-    alfa = 0.50
-    gamma = 0.10
-    TIMES = []
-    SOLVS = []
-    ggbest = 0
-    gG = []
-    return nIteration, nParticle, c1, c2, wmin, wmax, minCoordination, maxCoordination, minVel, maxVel, beta0, alfa, gamma, TIMES, SOLVS, ggbest, gG
+            print("Wrong input. Write help to see your choices. Please enter again.")
 
 def Initial_solution(nParticle,nVessel,minVel,maxVel,minCoordination,maxCoordination):
 

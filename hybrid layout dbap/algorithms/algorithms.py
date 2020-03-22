@@ -10,7 +10,8 @@ import algorithms.fo_maths as fo_maths
 import algorithms.pso_maths as pso_maths
 import functions.mutation as mutation
 
-def FO(structure, nIteration, nParticle, nVessel, nBerth, p, pro_tim, length, t1, t2, s, e, NAB, alfa, gamma, beta0, minCoordination, maxCoordination, minVel, maxVel, TIMES, SOLVS, ggbest, gG):
+def FO(common_inputs, alfa, gamma, beta0):
+    structure, nIteration, nParticle, nVessel, nBerth, p, pro_tim, length, t1, t2, s, e, NAB, minCoordination, maxCoordination, minVel, maxVel, TIMES, SOLVS, ggbest, gG = common_inputs
 
     ## get the initial solution
     SOLS, nf, Cost, GloSOL, P, pbest, G, gbest, Solution, Velocity, aux_mutation, aux_break = inputs.Initial_solution(nParticle, nVessel, minVel, maxVel, minCoordination, maxCoordination)
@@ -94,7 +95,8 @@ def FO(structure, nIteration, nParticle, nVessel, nBerth, p, pro_tim, length, t1
 
 #### PARTICLE SWARM OPTIMIZATION ###
 #### --------------------------- ###
-def PSO(structure, nIteration, nParticle, nVessel, nBerth, p, pro_tim, length, t1, t2, s, e, NAB, c1, c2, wmin, wmax, minCoordination, maxCoordination, minVel, maxVel, TIMES, SOLVS, ggbest, gG):
+def PSO(common_inputs, c1, c2, wmin, wmax):
+    structure, nIteration, nParticle, nVessel, nBerth, p, pro_tim, length, t1, t2, s, e, NAB, minCoordination, maxCoordination, minVel, maxVel, TIMES, SOLVS, ggbest, gG = common_inputs
 
     ## get the initial solution
     SOLS, nf, Cost, GloSOL, P, pbest, G, gbest, Solution, Velocity, aux_mutation, aux_break = inputs.Initial_solution(nParticle, nVessel, minVel, maxVel, minCoordination, maxCoordination)
@@ -174,7 +176,8 @@ def PSO(structure, nIteration, nParticle, nVessel, nBerth, p, pro_tim, length, t
 
 #### PARTICLE SWARM OPTIMIZATION ###
 #### --------------------------- ###
-def HFPSO(structure, nIteration, nParticle, nVessel, nBerth, p, pro_tim, length, t1, t2, s, e, NAB, alfa, gamma, beta0, c1, c2, wmin, wmax, minCoordination, maxCoordination, minVel, maxVel, TIMES, SOLVS, ggbest, gG):
+def HFPSO(common_inputs, alfa, gamma, beta0, c1, c2, wmin, wmax):
+    structure, nIteration, nParticle, nVessel, nBerth, p, pro_tim, length, t1, t2, s, e, NAB, minCoordination, maxCoordination, minVel, maxVel, TIMES, SOLVS, ggbest, gG = common_inputs
 
     ## get the initial solution
     SOLS, nf, Cost, GloSOL, P, pbest, G, gbest, Solution, Velocity, aux_mutation, aux_break = inputs.Initial_solution(nParticle, nVessel, minVel, maxVel, minCoordination, maxCoordination)
@@ -269,7 +272,8 @@ def HFPSO(structure, nIteration, nParticle, nVessel, nBerth, p, pro_tim, length,
 
 #### PARTICLE SWARM OPTIMIZATION ###
 #### --------------------------- ###
-def HFPSO2(structure, nIteration, nParticle, nVessel, nBerth, p, pro_tim, length, t1, t2, s, e, NAB, alfa, gamma, beta0, c1, c2, wmin, wmax, minCoordination, maxCoordination, minVel, maxVel, TIMES, SOLVS, ggbest, gG):
+def HFPSO2(common_inputs, alfa, gamma, beta0, c1, c2, wmin, wmax):
+    structure, nIteration, nParticle, nVessel, nBerth, p, pro_tim, length, t1, t2, s, e, NAB, minCoordination, maxCoordination, minVel, maxVel, TIMES, SOLVS, ggbest, gG = common_inputs
 
     ## get the initial solution
     SOLS, nf, Cost, GloSOL, P, pbest, G, gbest, Solution, Velocity, aux_mutation, aux_break = inputs.Initial_solution(nParticle, nVessel, minVel, maxVel, minCoordination, maxCoordination)
