@@ -39,8 +39,7 @@ def take_user_input(prompt="Choose one", input_type=str, possible_inputs=[], inp
         else:
             print("Wrong input. Write help to see your choices. Please enter again.")
 
-def Initial_solution(nParticle,nVessel,minVel,maxVel,minCoordination,maxCoordination):
-
+def Initial_solution(nParticle, nVessel, minVel, maxVel, minCoordination, maxCoordination):
     SOLS = [[] for _ in range(nParticle)]
     nf = [[] for _ in range(nParticle)]
     Cost = [np.inf for _ in range(nParticle)]
